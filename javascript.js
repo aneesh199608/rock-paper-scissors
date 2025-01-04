@@ -1,6 +1,3 @@
-let humanScore = 0; 
-let computerScore = 0;
-
 
 //Function "getComputerChoice" returns random string values "rock" or "paper" or "scissors"
 
@@ -19,15 +16,16 @@ function getComputerChoice() {
 //Function "getHumanChoice" for user to input his choice via prompt
 
 function getHumanChoice() {
-    humanAnswer = prompt('Welcome to our game! Type your choice of "Rock Paper Scissors"');
-    if (humanAnswer.toLowerCase() == "rock" || humanAnswer.toLowerCase() == "paper" || humanAnswer.toLowerCase() == "scissors") {
-            return humanAnswer;
+    let humanAnswer = prompt('Welcome to our game! Type your choice of "Rock Paper Scissors"').toLowerCase();
+    let valid = false;
+    while (true) {
+        if (humanAnswer == "rock" || humanAnswer == "paper" || humanAnswer == "scissors") {
+        return humanAnswer;
+    } else { 
+        humanAnswer = prompt('You have typed in a wrong input, please try again').toLowerCase();
         }
-     else {
-        
-        getHumanChoice();
-     }   
-    }
+     }
+    }   
 
 //Function "playRound" to play a single round
 //  -Compare computer and user choices
@@ -36,7 +34,6 @@ function getHumanChoice() {
 //  -Display winner
 
 function playRound(humanChoice, computerChoice) {
-    if(humanChoice.toLowerCase() == "rock" || humanChoice.toLowerCase() == "paper" || humanChoice.toLowerCase() == "scissors") {
     
     if (humanChoice.toLowerCase() == "rock") {
         if (computerChoice == "Rock") {
@@ -71,11 +68,6 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 }
-        else {
-            console.log("You have typed in a wrong input, please try again");
-            i=i-1;
-        }
-    }
 
     
 //Function "playGame" for user to play 5 rounds and keep track
@@ -88,7 +80,13 @@ function playGame() {
         playRound(humanSelection, computerSelection);
         console.log("Your Score: " + humanScore + "; Computer Score: "+ computerScore);
     }
-    console.log("That's it, it's been great playing with you!");
+    if (humanScore == computerScore) {
+        console.log("We are done with the game, and it'a a draw!");
+    } else if (humanScore > computerScore) {
+        console.log("We are done with the game, and you've WON!!! <Add drum rolls>");
+    }else {
+        console.log("We are done with the game, and sadly you've lost!");
+    }
 }
 //Declare final winner
 
@@ -96,6 +94,6 @@ function playGame() {
 // console.log("Computer choice: " + getComputerChoice());
 // console.log(humanScore);
 
-
+let humanScore = 0; 
+let computerScore = 0;
 const gamePlay = playGame();
-
