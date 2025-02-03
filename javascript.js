@@ -12,20 +12,16 @@ function getComputerChoice() {
     }
 }
 
-
-//Function "getHumanChoice" for user to input his choice via prompt
-
 function getHumanChoice() {
-    let humanAnswer = prompt('Welcome to our game! Type your choice of "Rock Paper Scissors"').toLowerCase();
-    let valid = false;
-    while (true) {
-        if (humanAnswer == "rock" || humanAnswer == "paper" || humanAnswer == "scissors") {
-        return humanAnswer;
-    } else { 
-        humanAnswer = prompt('You have typed in a wrong input, please try again').toLowerCase();
-        }
-     }
-    }   
+    let choice;
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            choice = button.textContent;
+        });
+    });
+    return choice;
+}
 
 //Function "playRound" to play a single round
 //  -Compare computer and user choices
@@ -71,6 +67,7 @@ function playRound(humanChoice, computerChoice) {
 
     
 //Function "playGame" for user to play 5 rounds and keep track
+//  - Declare final winner
 
 function playGame() {
     for (let i=1; i<6; i++) {
@@ -80,20 +77,22 @@ function playGame() {
         playRound(humanSelection, computerSelection);
         console.log("Your Score: " + humanScore + "; Computer Score: "+ computerScore);
     }
+
+    // Moved the win condition check outside the loop
     if (humanScore == computerScore) {
-        console.log("We are done with the game, and it'a a draw!");
+        console.log("We are done with the game, and it's a draw!");
     } else if (humanScore > computerScore) {
         console.log("We are done with the game, and you've WON!!! <Add drum rolls>");
-    }else {
+    } else {
         console.log("We are done with the game, and sadly you've lost!");
     }
 }
-//Declare final winner
-
-// console.log("Human choice: " + getHumanChoice());
-// console.log("Computer choice: " + getComputerChoice());
-// console.log(humanScore);
 
 let humanScore = 0; 
 let computerScore = 0;
-const gamePlay = playGame();
+playGame();
+
+//function to get the user choice
+
+// Wait for DOM to be fully loaded
+
